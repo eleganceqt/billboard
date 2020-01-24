@@ -1,0 +1,39 @@
+<!-- @formatter:off -->
+
+<h4 class="ui horizontal divider header">
+    <i class="chalkboard icon"></i>
+    Объявления
+</h4>
+
+<div class="ui centered grid" id="billboardAdverts__wrapper">
+
+    <!-- search -->
+    <div class="row">
+        {include file = './partials/search.html'}
+    </div>
+
+    <!-- filter -->
+    <div class="row hidden padding-top-0 filter-row">
+        {include file = './partials/filter.html'}
+    </div>
+
+    <!-- table -->
+    <div class="row padding-top-3">
+        {include file = './partials/table.html'}
+    </div>
+
+    <!-- modal placeholder -->
+    <div class="row billboardAdverts__modal-placeholder"></div>
+</div>
+
+<!-- Jquery Sortable JS -->
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.core.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.widget.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.mouse.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.position.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.sortable.min.js"></script>
+
+<script src="/wa-apps/billboard/js/modules/billboardAdvertsModule.js?v={$wa->version()}"></script>
+
+<!-- @formatter:on -->
+

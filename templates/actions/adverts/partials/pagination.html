@@ -1,0 +1,42 @@
+<!-- @formatter:off -->
+
+{$onEachSide = 2}
+
+{$leftBound = $currentPage - $onEachSide}
+{$rightBound = $currentPage + $onEachSide}
+
+{$start = ($leftBound > 1) ? $leftBound : 2}
+{$end = ($rightBound < $totalPages - 1) ? $rightBound : $totalPages - 1}
+
+{if $totalPages > 1}
+
+    <div class="ui secondary pagination menu">
+
+        <a class="{if $currentPage == 1}disabled{/if} icon item billboardAdverts__table-page" data-page="{$currentPage - 1}">
+            <i class="left chevron icon"></i>
+        </a>
+
+        <a class="{if $currentPage == 1}active{/if} item billboardAdverts__table-page" data-page="1">1</a>
+
+        {if ($currentPage - $onEachSide) > 2}
+            <a class="disabled item">...</a>
+        {/if}
+
+        {for $i = $start to $end}
+            <a class="{if $currentPage == $i}active{/if} item billboardAdverts__table-page" data-page="{$i}">{$i}</a>
+        {/for}
+
+        {if ($currentPage + $onEachSide) < ($totalPages - 1)}
+            <a class="disabled item">...</a>
+        {/if}
+
+        <a class="{if $currentPage == $totalPages}active{/if} item billboardAdverts__table-page" data-page="{$totalPages}">{$totalPages}</a>
+
+        <a class="{if $currentPage == $totalPages}disabled{/if} icon item billboardAdverts__table-page" data-page="{$currentPage + 1}">
+            <i class="right chevron icon"></i>
+        </a>
+
+    </div>
+{/if}
+
+<!-- @formatter:on -->

@@ -1,0 +1,96 @@
+<!-- @formatter:off -->
+
+<div class="fifteen wide column">
+    <div class="segment">
+        <table class="ui very basic sortable fixed single line selectable celled table" id="billboardAdverts__table">
+
+            <!-- thead -->
+            <thead>
+                <tr class="center aligned">
+                    <th class="one wide not-sortable"></th>
+                    <th class="one-half wide
+                        {if !empty($sort.column) && $sort.column === 'id'}
+                            sorted
+                            {if $sort.direction === 'asc'} ascending{/if}
+                            {if $sort.direction === 'desc'} descending{/if}
+                        {/if}" data-column="id">№</th>
+                    <th class="four wide
+                        {if !empty($sort.column) && $sort.column === 'title'}
+                            sorted
+                            {if $sort.direction === 'asc'} ascending{/if}
+                            {if $sort.direction === 'desc'} descending{/if}
+                        {/if}" data-column="title">Заголовок</th>
+                    <th class="three wide not-sortable">Категория</th>
+                    <th class="three wide not-sortable">Партнёр</th>
+                    <th class="three wide not-sortable">Город</th>
+                    <th class="two wide not-sortable"></th>
+                </tr>
+            </thead>
+
+            <!-- tbody -->
+            <tbody>
+                {if billboardValidation::notBlank($adverts)}
+                    {foreach $adverts as $advert}
+                        <tr data-advert-id="{$advert.id}">
+                            <td class="center aligned">
+                                <i class="{if $advert.status === billboardAdvertModel::STATUS_ON}green toggle on{else}red toggle off{/if} link status icon"></i>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">#{$advert.id}</a>
+                            </td>
+                            <td class="center aligned">
+                                <div class="ui tiny header" title="{$advert.title|escape}">{$advert.title|escape}</div>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">{if !empty($advert.category)}{$advert.category.name|escape}{else}—{/if}</a>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">{if $advert.partner->exists()}{$advert.partner->getName()|escape}{else}—{/if}</a>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">{if !empty($advert.city)}{$advert.city.name|escape}{else}—{/if}</a>
+                            </td>
+                            <td class="center aligned">
+                                {$phone = ''}
+                                {if $advert.partner->exists()}
+                                    {$phone = reset(ref($advert.partner->get('phone', 'value')))|regex_replace:'/\D/':''|ltrim:'0'}
+                                {/if}
+                                <a href="https://wa.me/{$phone|escape}" target="_blank" class="ui small compact icon {if !$advert.partner->exists()}disabled{/if} bttn">
+                                    <i class="green whatsapp icon"></i>
+                                </a>
+                                <div class="ui small compact icon bttn billboardAdverts__table--edit-advert-bttn">
+                                    <i class="pencil alternate icon"></i>
+                                </div>
+                                <div class="ui small compact icon bttn billboardAdverts__table--remove-advert-bttn">
+                                    <i class="trash alternate icon"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr class="center aligned">
+                        <td colspan="7">
+                            <div class="ui tiny grey header">Нет результатов</div>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+
+            <!-- tfoot -->
+            <tfoot>
+                <tr class="center aligned">
+                    <th colspan="7">
+                        {include file = './pagination.html'}
+                    </th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <div class="ui inverted  dimmer billboardAdverts__table-dimmer">
+            <div class="ui text violet loader">Loading</div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

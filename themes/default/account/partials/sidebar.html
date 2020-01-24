@@ -1,0 +1,13 @@
+<div id="my-sidebar">
+    <div class="avatar">
+        <div class="image">
+            <img src="{$wa_active_theme_url}img/images/user.png" alt="">
+            <div class="reload-btn">
+                <div class="reload"></div>
+            </div>
+        </div>
+    </div>
+    <div class="name">{$wa->user()->get('company', 'value')}</div>
+    <div class="data-registration">На сайте {$wa->user()->get('create_datetime', 'value')|wa_datetime:'humandate'}</div>
+    <div class="phone"><a href="tel:=+373 60 070153">{reset(ref($wa->user()->get('phone', 'value')))|escape}</a></div>
+</div>

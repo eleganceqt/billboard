@@ -1,0 +1,70 @@
+<!-- @formatter:off -->
+
+<div class="ui large modal billboardCities__modal">
+    <i class="close icon"></i>
+    <div class="ui center aligned header">
+        {if $city.id === billboardCityModel::ID_NEW}
+            Новый город
+        {else}
+            Город #{$city.id}
+        {/if}
+    </div>
+    <div class="content">
+        <div class="ui form">
+
+            <input type="hidden" name="id" value="{$city.id}">
+
+            <!-- name -->
+            <div class="field">
+                <label>Название</label>
+                <input type="text" name="name" value="{$city.name|escape}" autocomplete="off">
+            </div>
+
+            <!-- country -->
+            <div class="field">
+                <label>Страна</label>
+                <div class="ui fluid disabled selection dropdown billboardCities__modal--country-dropdown">
+                    <input type="hidden" name="country_iso3" value="rus">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Страна</div>
+
+                    <div class="menu overflow-y-hidden max-height-27rem">
+                        <div class="ui search icon input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="Search country...">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="scrolling menu">
+                            <div class="item" data-value="rus">Российская Федерация</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- count -->
+            <div class="field">
+                <label>Кол-во объявлений</label>
+                <a class="ui basic label">{$city.active_count} / {$city.total_count}</a>
+            </div>
+
+            <!-- ranking -->
+            <div class="field">
+                <label>Ранжирование</label>
+                <input type="number" name="ranking" value="{$city.ranking}" autocomplete="off">
+            </div>
+
+            <!-- message -->
+            <div class="field billboardCities__modal--message-field"></div>
+
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui basic center aligned segment">
+            <div class="ui primary bttn billboardCities__modal--save-button">
+                Сохранить
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

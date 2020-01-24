@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1{if $wa->isMobile()}, maximum-scale=1, user-scalable=0{/if}" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
+    <title>{$wa->title()|escape} — {$wa->appName()}</title>
+    <meta name="keywords" content="{$wa->meta('keywords')|escape}" />
+    <meta name="description" content="{$wa->meta('description')|escape}" />
+
+    {if !empty($canonical)}<link rel="canonical" href="{$canonical}"/>{/if}
+
+    <link rel="shortcut icon" href="/favicon.ico"/>
+
+
+    {include file="`$wa_active_theme_path`/head.html" inline}
+
+    {$wa->head()}
+
+    <!--[if lt IE 9]>
+    <script>
+    document.createElement('header');
+    document.createElement('nav');
+    document.createElement('section');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('footer');
+    document.createElement('figure');
+    document.createElement('hgroup');
+    document.createElement('menu');
+    </script>
+    <![endif]-->
+
+</head>
+<body>
+    <header class="globalheader">
+
+        <!-- APP NAVIGATION -->
+        <div class="container appnav" id="header-container">
+
+            {include file="`$wa_active_theme_path`/header.html" inline}
+
+            <div class="clear-both"></div>
+        </div>
+
+    </header>
+
+    <!-- APP CONTENT -->
+    <main class="maincontent">
+        <div class="container">
+            {include file="`$wa_active_theme_path`/main.html" inline}
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="globalfooter">
+        <div class="container">
+            <div class="appfooter">
+                {*
+                <div class="copyright">
+                    &copy; {time()|wa_datetime:"Y"}
+                    <a href="{$wa_url}">{$wa->accountName()}</a>
+                </div>
+                *}
+                {include file="`$wa_active_theme_path`/footer.html" inline}
+            </div>
+        </div>
+
+    </footer>
+{*wa_tpl_vars*}
+</body>
+</html>

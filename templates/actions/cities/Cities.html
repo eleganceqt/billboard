@@ -1,0 +1,26 @@
+<!-- @formatter:off -->
+
+<h4 class="ui horizontal divider header">
+    <i class="map marked alternate icon"></i>
+    Города
+</h4>
+
+<div class="ui centered grid" id="billboardCities__wrapper">
+
+    <!-- search -->
+    <div class="row">
+        {include file = './partials/search.html'}
+    </div>
+
+    <!-- table -->
+    <div class="row padding-top-3">
+        {include file = './partials/table.html'}
+    </div>
+
+    <!-- modal placeholder -->
+    <div class="row billboardCities__modal-placeholder"></div>
+</div>
+
+<script src="/wa-apps/billboard/js/modules/billboardCitiesModule.js?v={$wa->version()}"></script>
+
+<!-- @formatter:on -->

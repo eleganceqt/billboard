@@ -1,0 +1,80 @@
+<!-- @formatter:off -->
+
+<div class="ui large modal billboardPartners__modal">
+    <i class="close icon"></i>
+    <div class="ui center aligned header">
+        Партнёр #{$partner->getId()}
+    </div>
+    <div class="content">
+
+        <div class="ui form">
+
+            <input type="hidden" name="id" value="{$partner->getId()}">
+
+            <!-- company -->
+            <div class="field">
+                <label>Компания</label>
+                <a {if $partner->exists()}href="{$wa_backend_url}contacts/#/contact/{$partner->getId()}/"{/if} target="_blank" class="ui fluid basic bttn" style="text-align: left;">
+                    <i class="user tie icon"></i>
+                    {if $partner->exists()}
+                        {$partner->get('company', 'value')|escape}
+                    {else}
+                        —
+                    {/if}
+                </a>
+            </div>
+
+            <!-- phone -->
+            <div class="field">
+                <label>Телефон</label>
+                {$phone = ''}
+                {if $partner->exists()}
+                    {$phone = reset(ref($partner->get('phone', 'value')))|regex_replace:'/\D/':''|ltrim:'0'}
+                {/if}
+                <a href="https://wa.me/{$phone|escape}" target="_blank" class="ui fluid basic bttn" style="text-align: left;">
+                    <i class="phone alternate icon"></i>
+                    {if $partner->exists()}
+                        {reset(ref($partner->get('phone', 'value')))|escape}
+                    {/if}
+                </a>
+            </div>
+
+            <!-- count -->
+            <div class="field">
+                <label>Кол-во объявлений</label>
+                <a class="ui basic label">{$partner->get('active_count')} / {$partner->get('total_count')}</a>
+            </div>
+
+            <!-- operations -->
+            <div class="fields">
+                <div class="fifteen wide field">
+                    <label>Действия</label>
+                    <div class="ui selection operations dropdown">
+                        <input type="hidden" name="operation">
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                        <div class="menu">
+                            <div class="item" data-value="partners/hideAll/">
+                                <i class="grey toggle off icon"></i>Скрыть все объявления</div>
+                            <div class="item" data-value="partners/showAll/">
+                                <i class="grey toggle on icon"></i>Показать все объявления</div>
+                            <div class="item" data-value="partners/deleteAll/">
+                                <i class="grey trash alternate icon"></i>Удалить все объявления</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one wide field">
+                    <label>&nbsp;</label>
+                    <div class="ui basic icon disabled bttn execute-operation" style="height: 38px;"><i class="arrow alternate circle up icon"></i></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="ui basic center aligned segment"></div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

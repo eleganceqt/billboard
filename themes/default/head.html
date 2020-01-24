@@ -1,0 +1,34 @@
+<!-- css -->
+<link href="{$wa_theme_url}css/normalize.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}css/default.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}js/owl/owl.carousel.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}js/semantic/dropdown.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}js/semantic/transition.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}semantic/components/icon.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}semantic/components/loader.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_theme_url}semantic/components/label.min.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+
+<link href="{$wa_url}wa-content/font/ruble/arial/fontface.css" rel="stylesheet" type="text/css" />
+
+
+{$wa->css()}
+
+<!-- js -->
+<script type="text/javascript" src="{$wa_static_url}wa-content/js/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{$wa_static_url}wa-content/js/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}js/default.js?v{$wa_theme_version}"></script>
+<script type="text/javascript" src="{$wa_theme_url}js/owl/owl.carousel.min.js?v{$wa_theme_version}"></script>
+<script type="text/javascript" src="{$wa_theme_url}js/semantic/dropdown.min.js?v{$wa_theme_version}"></script>
+<script type="text/javascript" src="{$wa_theme_url}js/semantic/transition.min.js?v{$wa_theme_version}"></script>
+
+<!-- Modules -->
+<script src="{$wa_theme_url}/js/modules/favoriteModule.js?v={$wa->version()}"></script>
+
+{if in_array($wa->param('action'), [null, 'category', 'search'], true)}
+    <script src="{$wa_theme_url}/js/modules/searchModule.js?v={$wa->version()}"></script>
+{/if}
+
+
+
+{$wa->js()}

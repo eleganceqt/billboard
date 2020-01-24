@@ -1,0 +1,101 @@
+<!-- @formatter:off -->
+
+<form id="filter" class="billboardSearch--filters-form" data-shown="{if $wa->param('action') === 'search'}true{else}false{/if}">
+
+    <div class="filter-stub">
+        <div class="stub-title">
+            <span>Или смотри ниже</span><br>
+            что у нас интересного<br>
+            для тебя сегодня
+        </div>
+        <div class="stub-line">
+            <span></span>
+            <p>Иди вниз</p>
+        </div>
+    </div>
+
+    <div class="filter-items">
+
+        {$searchCategories = $wa->billboard->categories()}
+        <div class="cat-dd">
+            <span class="title category">Категория</span>
+            <div class="ui categories dropdown">
+                <input type="hidden" name="category_id" {if in_array($wa->get('category_id'), array_keys($searchCategories))}value="{$wa->get('category_id')|escape}"{/if}>
+                <span class="text">Выберите категорию</span>
+                <i class="angle down icon"></i>
+                <div class="menu">
+                    <div class="ui icon search input">
+                        <i class="search icon"></i>
+                        <input type="text" placeholder="Поиск...">
+                    </div>
+
+                    <div class="scrolling menu">
+                        {foreach $searchCategories as $searchCategory}
+
+                            <div class="item {if $searchCategory.depth == 0}root-category{/if}" data-value="{$searchCategory.id}">
+                                {for $i = 1 to $searchCategory.depth}
+                                    <i class="icon"></i>
+                                {/for}
+                                {$searchCategory.name|escape}
+                            </div>
+
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {$searchCities = $wa->billboard->cities()}
+        <div class="city-dd">
+            <span class="title city">Город</span>
+            <div class="ui cities dropdown">
+                <input type="hidden" name="city_id" {if in_array($wa->get('city_id'), array_keys($searchCities))}value="{$wa->get('city_id')|escape}"{/if}>
+                <span class="text">Выберите город</span>
+                <i class="angle down icon"></i>
+                <div class="menu">
+                    <div class="ui icon search input">
+                        <i class="search icon"></i>
+                        <input type="text" placeholder="Поиск...">
+                    </div>
+
+                    <div class="scrolling menu">
+                        {foreach $searchCities as $searchCity}
+                            <div class="item" data-value="{$searchCity.id}">{$searchCity.name|escape}</div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-wrap">
+            <span class="title price">Цена</span>
+            <div class="wrapper">
+                <div class="min">
+                    <input type="text" class="price_input price-from" id="min_price" name="price_from" {if $wa->get('price_from')}value="{(int) $wa->get('price_from')}"{/if} placeholder="от" autocomplete="off">
+                </div>
+                <div class="max">
+                    <input type="text" class="price_input price-to" id="max_price" name="price_to" {if $wa->get('price_to')}value="{(int) $wa->get('price_to')}"{/if} placeholder="до" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        {*
+        <div class="checkbox-wrap">
+            <div class="checkbox">
+                <input type="checkbox" name="free_price" id="cbx" style="display:none" />
+                <label class="checkbox-toggle" for="cbx"><span></span></label>
+                <label class="name" for="cbx">Бесплатно</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" class="cbx" name="width_photo" id="cbx2" style="display:none" />
+                <label class="checkbox-toggle" for="cbx2"><span></span></label>
+                <label class="name" for="cbx2">С фото</label>
+            </div>
+        </div>
+        *}
+    </div>
+    <div class="submit">
+        <input type="submit" class="btn button-blue" value="Подобрать результаты">
+    </div>
+</form>
+
+<!-- @formatter:on -->

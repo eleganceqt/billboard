@@ -1,0 +1,24 @@
+<!-- @formatter:off -->
+
+<div id="sub-categories">
+
+
+    <div class="sub-categories-wrap">
+
+        {include file = './../breadcrumbs.html' inline}
+
+        <div class="title">{$category.name|escape}</div>
+        {$childCategories = $wa->billboard->childCategories($category.id)}
+        {if billboardValidation::notBlank($childCategories)}
+            <ul class="list">
+                {foreach $childCategories as $childCategory}
+                    <li>
+                        <a href="{$wa->getUrl('/frontend/category', ['category_url' => $childCategory.slug])}">{$childCategory.name|escape} <span class="count">{$childCategory.adverts_count}</span></a>
+                    </li>
+                {/foreach}
+            </ul>
+        {/if}
+    </div>
+</div>
+
+<!-- @formatter:on -->

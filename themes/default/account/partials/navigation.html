@@ -1,0 +1,14 @@
+<!-- @formatter:off -->
+
+<div class="list-types">
+    <ul>
+        <li {if $wa->param('action') === 'accountAdverts'}class="active"{/if}>
+            <a href="{$wa->getUrl('/frontend/accountAdverts')}">Мои объявления</a>
+        </li>
+        <li {if $wa->param('action') === 'accountFavorites'}class="active"{/if}>
+            <a href="{$wa->getUrl('/frontend/accountFavorites')}">Избранные <span class="count">{$wa->billboard->favoritesCount()}</span></a>
+        </li>
+    </ul>
+</div>
+
+<!-- @formatter:on -->

@@ -1,0 +1,12 @@
+<!-- @formatter:off -->
+
+<div class="ui fluid vertical tabular menu plugins-menu">
+    {foreach $plugins as $plugin}
+        <a href="{if $plugin.custom_settings}{$wa_app_url}plugins/?plugin={$plugin.id}&module=settings{else}{$plugin.id}/{/if}" class="{if $wa->get('plugin') == $plugin.id}active{/if} item">
+            <i class="plug icon"></i>
+            {$plugin.name|escape}
+        </a>
+    {/foreach}
+</div>
+
+<!-- @formatter:on -->

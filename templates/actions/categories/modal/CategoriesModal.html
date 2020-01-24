@@ -1,0 +1,117 @@
+<!-- @formatter:off -->
+
+<div class="ui large modal billboardCategories__modal">
+    <i class="close icon"></i>
+    <div class="ui center aligned header">
+        {if $category.id === billboardCityModel::ID_NEW}
+            Новая категория
+        {else}
+            Категория #{$category.id}
+        {/if}
+    </div>
+    <div class="scrolling content">
+
+        <div class="ui form">
+
+            <div class="ui small dividing header">Основная информация</div>
+
+            <input type="hidden" name="id" value="{$category.id}">
+
+            <input type="hidden" name="parent_id" value="{$category.parent_id}">
+
+            <!-- status -->
+            <div class="field">
+                <label>Статус</label>
+                <div class="ui selection dropdown billboardCategories__modal--status-dropdown">
+                    <input type="hidden" name="status" value="{$category.status|escape}">
+                    <i class="dropdown icon"></i>
+                    <div class="default text"></div>
+                    <div class="menu">
+                        <div class="item" data-value="on">
+                            <i class="green toggle on icon"></i>
+                            Вкл.
+                        </div>
+                        <div class="item" data-value="off">
+                            <i class="red toggle off icon"></i>
+                            Выкл.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- name -->
+            <div class="field">
+                <label>Название</label>
+                <input type="text" name="name" value="{$category.name|escape}" autocomplete="off">
+            </div>
+
+            <!-- slug -->
+            <div class="field">
+                <label>Урл</label>
+                <input type="text" name="slug" value="{$category.slug|escape}" autocomplete="off">
+            </div>
+
+            <div class="ui small dividing header">Второстепенная информация</div>
+
+            <!-- title -->
+            <div class="field">
+                <label>Заголовок</label>
+                <input type="text" name="title" value="{$category.title|escape}" autocomplete="off">
+            </div>
+
+            <!-- description -->
+            <div class="field">
+                <label>Описание</label>
+                <textarea name="description" id="description_redactor"></textarea>
+            </div>
+
+            <!-- meta keywords -->
+            <div class="field">
+                <label>Meta Keywords</label>
+                <textarea rows="5" name="meta_keywords">{$category.meta_keywords|escape}</textarea>
+            </div>
+
+            <!-- meta description -->
+            <div class="field">
+                <label>Meta Description</label>
+                <textarea rows="5" name="meta_description">{$category.meta_description|escape}</textarea>
+            </div>
+
+            <div class="fields">
+                <div class="fifteen wide field">
+                    <label>Действия</label>
+                    <div class="ui selection operations dropdown">
+                        <input type="hidden" name="operation">
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                        <div class="menu">
+                            <div class="item" data-value="categories/hideAll/">
+                                <i class="grey toggle off icon"></i>Скрыть все объявления</div>
+                            <div class="item" data-value="categories/showAll/">
+                                <i class="grey toggle on icon"></i>Показать все объявления</div>
+                            <div class="item" data-value="categories/deleteAll/">
+                                <i class="grey trash alternate icon"></i>Удалить все объявления</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one wide field">
+                    <label>&nbsp;</label>
+                    <div class="ui basic icon disabled bttn execute-operation" style="height: 38px;"><i class="arrow alternate circle up icon"></i></div>
+                </div>
+            </div>
+
+            <!-- message -->
+            <div class="field billboardCategories__modal--message-field"></div>
+
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui basic center aligned segment">
+            <div class="ui primary bttn billboardCategories__modal--save-button">
+                Сохранить
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

@@ -1,0 +1,66 @@
+<!-- @formatter:off -->
+
+<div id="header">
+    <div class="inner-wrap">
+        <div class="header-wrap">
+
+            <div class="left">
+                <div class="logo">
+                    <a href="http://billboard.quadrodizain.ru/">
+                        <svg width="37" height="24" viewBox="0 0 37 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5.14286H7.2V24H12.6857V5.14286H19.8857V0H0V5.14286Z" fill="#2558CB" />
+                            <path d="M16.7598 18.8571H23.9598V0H29.4455V18.8571H36.6455V24H16.7598V18.8571Z" fill="#2558CB" />
+                        </svg>
+                    </a>
+                </div>
+                <a href="{$wa->getUrl('/frontend/accountAdvertCreate')}" class="add">
+                    <span class="i-add"></span>
+                    <div class="title green">Добавить объявление</div>
+                </a>
+            </div>
+
+            <div class="right">
+
+                {* COMMENTED AS A BACKUP
+                <div class="header_search hidden">
+                    <form class="search">
+                        <label class="search_label" for="search_text">
+                            <input type="text" name="search_text" id="search_text" placeholder="Найти" autocomplete="off">
+                        </label>
+                        <div class="bnt-search-hide_icon"></div>
+                    </form>
+                    <div class="bnt-search-show_icon"></div>
+                </div>
+                *}
+
+                {if $wa->user()->isAuth()}
+
+                    <div class="header_favorites">
+                        <a href="{$wa->getUrl('/frontend/accountFavorites')}" class="fav-icon"></a>
+                    </div>
+
+                    <div class="header_user">
+                        <a href="#" class="user-icon"></a>
+                        <div class="user-drop">
+                            <ul>
+                                <li><a href="{$wa->getUrl('/frontend/accountAdverts')}">Мои объявления</a></li>
+                                <li><a href="{$wa->getUrl('/frontend/accountFavorites')}">Мои избранные</a></li>
+                                <li class="last"><a href="?logout">Выйти</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {else}
+                    <div class="enter-wrap">
+                        <a href="{$wa->getUrl('/login')}" title="Войти">
+                            <i class="sign in alternate large gray icon" style="font-size: 24px;"></i>
+                        </a>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="`$wa_active_theme_path`/nav-mobile.html" inline}
+
+<!-- @formatter:on -->

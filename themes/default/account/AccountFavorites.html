@@ -1,0 +1,23 @@
+<div id="favorites" class="inner-wrap">
+
+    {include file = "`$wa_active_theme_path`/partials/breadcrumbs.html" inline}
+
+    <h3 class="h3 mb36">Личный кабинет</h3>
+
+    {include file = './partials/navigation.html' inline}
+
+    <div id="main-wrap">
+        <div id="main-side-bar">
+            {include file = './partials/sidebar.html' inline}
+        </div>
+
+        <div id="main-right-wrap">
+            <div class="main-add-list">
+                <div class="list-wrap">
+                    {include file = "`$wa_active_theme_path`/adverts.list.html" adverts = $adverts inline}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mb300"></div>

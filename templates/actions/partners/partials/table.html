@@ -1,0 +1,89 @@
+<!-- @formatter:off -->
+
+<div class="fifteen wide column">
+    <div class="segment">
+        <table class="ui very basic sortable fixed single line selectable celled table" id="billboardPartners__table">
+
+            <!-- thead -->
+            <thead>
+                <tr class="center aligned">
+                    <th class="one-half wide not-sortable">№</th>
+                    <th class="five wide not-sortable">Компания</th>
+                    <th class="four wide not-sortable">Телефон</th>
+                    <th class="three wide not-sortable">Почта</th>
+                    <th class="two wide not-sortable">Кол-во</th>
+                    <th class="three wide not-sortable"></th>
+                </tr>
+            </thead>
+
+            <!-- tbody -->
+            <tbody>
+                {if !empty($partners)}
+                    {foreach $partners as $partner}
+                        <tr data-partner-id="{$partner.id}">
+                            <td class="center aligned">
+                                <a href="#">#{$partner.id}</a>
+                            </td>
+                            <td class="center aligned">
+                                <div class="ui tiny header" title="{$partner.company|escape}">{$partner.company|escape}</div>
+                            </td>
+                            <td class="center aligned">
+                                {$phone = ''}
+                                {if $partner.phone}
+                                    {$phone = $partner.phone.0.formatted|regex_replace:'/\D/':''|ltrim:'0'}
+                                {/if}
+                                <a href="https://wa.me/{$phone|escape}" target="_blank">
+                                    {if $partner.phone}
+                                        {$partner.phone.0.formatted|escape}
+                                    {else}
+                                        —
+                                    {/if}
+                                </a>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">
+                                    {if !empty($partner.email)}
+                                        {reset(ref($partner.email))|escape}
+                                    {else}
+                                        —
+                                    {/if}
+                                </a>
+                            </td>
+                            <td class="center aligned">
+                                <a class="ui basic label">{$partner.active_count} / {$partner.total_count}</a>
+                            </td>
+                            <td class="center aligned">
+                                <div class="ui small compact bttn billboardPartners__table--edit-partner-bttn">
+                                    <i class="edit icon"></i>
+                                    Редактировать
+                                </div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr class="center aligned">
+                        <td colspan="6">
+                            <div class="ui tiny grey header">Нет результатов</div>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+
+            <!-- tfoot -->
+            <tfoot>
+                <tr class="center aligned">
+                    <th colspan="6">
+                        {include file = './pagination.html'}
+                    </th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <div class="ui inverted  dimmer billboardPartners__table-dimmer">
+            <div class="ui text violet loader">Loading</div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

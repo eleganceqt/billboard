@@ -1,0 +1,160 @@
+<!-- @formatter:off -->
+
+<div class="list-thumbs list-thumbs-wrap" data-style="big-thumb">
+
+    {if billboardValidation::notBlank($adverts)}
+
+        {$keys = $wa->billboard->splitAdvertsByImage($adverts)}
+
+        {$squareImages = $wa->billboard->advertsMainImages($keys['square'], '140x140')}
+        {$rectangularImages = $wa->billboard->advertsMainImages($keys['rectangular'], '170x200')}
+
+        {$advertsMainImages = $squareImages + $rectangularImages}
+
+        <ul class="list-thumbs_ul">
+
+            {foreach $adverts as $advert}
+
+            {$advertMainImageSrc = ( !empty($advertsMainImages[$advert.id]) ) ? $advertsMainImages[$advert.id]['url'] : "`$wa_active_theme_url`img/images/nophoto.png"}
+                <li class="list-thumbs_li">
+                    <div class="thumb-img">
+                        <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">
+                            <img src="{$advertMainImageSrc}" alt="{$advert.title|escape}" title="{$advert.title|escape}">
+                        </a>
+                    </div>
+
+                    <div class="thumb-info" data-user="guest">
+
+                        <div class="title">
+                            <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">{$advert.title|escape}</a>
+                            <div class="star-wrap">
+                                <div class="star {if $wa->user()->isAuth()}user{else}guest{/if}"
+                                    data-add-url="{$wa->getUrl('/frontend/accountFavoriteAdd', ['advert_id' => $advert.id])}"
+                                    data-remove-url="{$wa->getUrl('/frontend/accountFavoriteRemove', ['advert_id' => $advert.id])}"
+                                    data-style="{if $wa->billboard->inFavorites($advert.id)}fill{else}empty{/if}">
+                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="e-star"
+                                            d="M11.8677 1.3L14.5858 7.82362L14.7032 8.10537L15.0075 8.12971L22.0608 8.69417L16.6876 13.2887L16.4552 13.4874L16.5262 13.7849L18.1681 20.6558L12.1279 16.9731L11.8677 16.8144L11.6074 16.9731L5.56717 20.6558L7.20907 13.7849L7.28016 13.4874L7.04771 13.2887L1.6745 8.69417L8.72783 8.12971L9.03208 8.10537L9.14948 7.82362L11.8677 1.3Z"
+                                            fill="" stroke="#A0A9B2"></path>
+                                    </svg>
+                                </div>
+                                {if !$wa->user()->isAuth()}
+                                    <div class="ui-mess-wrap">
+                                        <div class="ui left pointing label">
+                                            Cначала <a href="">авторизуйтесь</a>
+                                        </div>
+                                    </div>
+                                {/if}
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <div class="price-wrap">
+                                <span class="price">{billboard_currency($advert.price)}</span>
+                                <span class="data">
+                                    {if billboardValidation::notBlank($advert.category)}
+                                        <a href="{$wa->getUrl('/frontend/category', ['category_url' => $advert.category.slug])}" class="tag">{$advert.category.name|escape}</a>
+                                    {/if}
+                                    <span class="simbols">{$advert.create_datetime|wa_datetime:'humandatetime'}</span>
+                                </span>
+                            </div>
+                            <div class="desc">
+                                <p>{mb_strimwidth($advert.description, 0, 250, '...')|escape}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+            {/foreach}
+
+            {*
+            <li class="list-thumbs_li">
+                <div class="thumb-img">
+                    <a href="http://billboard.quadrodizain.ru/advert/">
+                        <!-- <img src="https://i.imgur.com/YKvJxrg.png" alt=""> -->
+                        <img src="https://i.imgur.com/a0HDoKa.png" alt="">
+                    </a>
+                </div>
+                <div class="thumb-info">
+                    <div class="title">
+                        <a href="http://billboard.quadrodizain.ru/advert/">Морозильник по низкой цене!</a>
+                        <div class="star {}" data-style="empty">
+                            <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="e-star"
+                                      d="M11.8677 1.3L14.5858 7.82362L14.7032 8.10537L15.0075 8.12971L22.0608 8.69417L16.6876 13.2887L16.4552 13.4874L16.5262 13.7849L18.1681 20.6558L12.1279 16.9731L11.8677 16.8144L11.6074 16.9731L5.56717 20.6558L7.20907 13.7849L7.28016 13.4874L7.04771 13.2887L1.6745 8.69417L8.72783 8.12971L9.03208 8.10537L9.14948 7.82362L11.8677 1.3Z"
+                                      fill="" stroke="#A0A9B2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="price-wrap">
+                            <span class="price">15 000 руб</span>
+                            <span class="data">
+                                <div class="tag">Другое</div>
+                                <span class="simbols">05 окт. 2019, 00:30</span>
+                            </span>
+                        </div>
+                        <div class="desc">
+                            <p>Продаю морозильник новый за 15 000 т.р. покупала за 25000т.р. Морозильник с гарантией (Бирюса) объем 355лит. номер. 8922
+                                791 0668. Продаю морозильник новый за 15 000 т.р. покупала за 25000т.р.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="list-thumbs_li">
+                <div class="thumb-img">
+                    <a href="">
+                        <img src="https://i.imgur.com/YKvJxrg.png" alt="">
+                    </a>
+                </div>
+                <div class="thumb-info">
+                    <div class="title">
+                        <a href="">Морозильник по низкой цене!</a>
+                        <div class="star" data-style="empty">
+                            <!--fill-->
+                            <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="e-star"
+                                      d="M11.8677 1.3L14.5858 7.82362L14.7032 8.10537L15.0075 8.12971L22.0608 8.69417L16.6876 13.2887L16.4552 13.4874L16.5262 13.7849L18.1681 20.6558L12.1279 16.9731L11.8677 16.8144L11.6074 16.9731L5.56717 20.6558L7.20907 13.7849L7.28016 13.4874L7.04771 13.2887L1.6745 8.69417L8.72783 8.12971L9.03208 8.10537L9.14948 7.82362L11.8677 1.3Z"
+                                      fill="" stroke="#A0A9B2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="price-wrap">
+                            <span class="price">15 000 руб</span>
+                            <span class="data">
+                                <div class="tag">Другое</div>
+                                <span class="simbols">05 окт. 2019, 00:30</span>
+                            </span>
+                        </div>
+                        <div class="desc">
+                            <p>Продаю морозильник новый за 15 000 т.р. покупала за 25000т.р. Морозильник с гарантией (Бирюса) объем
+                                355лит. номер. 8922
+                                791 0668. Продаю морозильник новый за 15 000 т.р. покупала за 25000т.р.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            *}
+
+
+        </ul>
+    {else}
+        <ul class="list-thumbs_ul empty-list">
+            <li class="list-thumbs_li">
+                <div class="error-message">
+                    <span class="h3">Объявлений не найдено!</span>
+                </div>
+            </li>
+        </ul>
+    {/if}
+
+
+</div>
+
+{if isset($totalPages) && $totalPages > 1}
+    {wa_pagination page = $currentPage total = $totalPages attrs = ['class' => 'pagination-list']}
+{/if}
+
+<!-- @formatter:on -->

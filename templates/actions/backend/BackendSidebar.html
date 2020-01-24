@@ -1,0 +1,58 @@
+{$currentUrl = $wa->currentUrl(false, true)}
+{$module = $wa->param('module')}
+
+<div class="ui fluid secondary vertical pointing menu sidebar-menu" style="min-height: calc(100vh - 153px) !important;">
+
+    <!-- adverts -->
+    {$advertsUrl = $wa_app_url|cat:'adverts/'}
+    <a href="{($currentUrl !== $advertsUrl) ? $advertsUrl : 'javascript:void(0);'}" class="{if $module === 'adverts'}active{/if} item">
+        <i class="chalkboard icon"></i>
+        Объявления
+        <div class="ui small compact label">{$counts.adverts}</div>
+    </a>
+
+    <!-- partners -->
+    {$partnersUrl = $wa_app_url|cat:'partners/'}
+    <a href="{($currentUrl !== $partnersUrl) ? $partnersUrl : 'javascript:void(0);'}" class="{if $module === 'partners'}active{/if} item">
+        <i class="user tie icon"></i>
+        Партнёры
+        <div class="ui small compact label">{$counts.partners}</div>
+    </a>
+
+    <!-- categories -->
+    {$categoriesUrl = $wa_app_url|cat:'categories/'}
+    <a href="{($currentUrl !== $categoriesUrl) ? $categoriesUrl : 'javascript:void(0);'}" class="{if $module === 'categories'}active{/if} item">
+        <i class="folder icon"></i>
+        Категории
+        <div class="ui small compact label">{$counts.categories}</div>
+    </a>
+
+    <!-- cities -->
+    {$citiesUrl = $wa_app_url|cat:'cities/'}
+    <a href="{($currentUrl !== $citiesUrl) ? $citiesUrl : 'javascript:void(0);'}" class="{if $module === 'cities'}active{/if} item">
+        <i class="map marked alternate icon"></i>
+        Города
+        <div class="ui small compact label">{$counts.cities}</div>
+    </a>
+
+    {*
+    <!-- pages -->
+    {$pagesUrl = $wa_app_url|cat:'pages/'}
+    <a href="{($currentUrl !== $pagesUrl) ? $pagesUrl : 'javascript:void(0);'}" class="{if $module === 'pages'}active{/if} item">
+        <i class="file alternate icon"></i>
+        Страницы
+        <div class="ui small compact label">{$counts.pages}</div>
+    </a>
+    *}
+
+    <!-- plugins -->
+    {$pluginsUrl = $wa_app_url|cat:'plugins/'}
+    <a href="{($currentUrl !== $pluginsUrl) ? $pluginsUrl : 'javascript:void(0);'}" class="{if $module === 'plugins' || $wa->get('plugin', null)}active{/if} item">
+        <i class="plug icon"></i>
+        Плагины
+        <div class="ui small compact label">{$counts.plugins}</div>
+    </a>
+
+</div>
+
+

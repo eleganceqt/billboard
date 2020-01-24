@@ -1,0 +1,79 @@
+<h4 class="ui horizontal divider header">
+    <i class="plug icon"></i>
+    Плагины
+</h4>
+
+<style>
+    .plugins-menu {
+        border-right: 2px solid rgba(34, 36, 38, 0.15) !important;
+        min-height: calc(100vh - 188px) !important;
+    }
+
+    .plugins-menu .active.item {
+        border-width: 2px !important;
+        margin: 0 -2px 0 0 !important;
+        color: #6435c9 !important;
+
+        /*color: inherit !important;*/
+    }
+
+    /*.plugins-menu .item {*/
+    /*    border-right: 2px solid transparent !important;*/
+    /*    border-bottom: 2px solid transparent !important;*/
+    /*    border-top: 2px solid transparent !important;*/
+    /*}*/
+
+    .plugins-menu .item > i.icon {
+        /*opacity: 0.9 !important;*/
+        float: left !important;
+        margin: 0 1em 0 0 !important;
+    }
+
+    /* Hover */
+    .plugins-menu .dropdown.item:hover,
+    .plugins-menu .link.item:hover,
+    .plugins-menu a.item:hover:not(.active) {
+        /*color: inherit !important;*/
+        color: #6435c9 !important;
+    }
+
+    /* Hover */
+    .plugins-menu .dropdown.item:not(.active):hover,
+    .plugins-menu .link.item:not(.active):hover,
+    .plugins-menu a.item:not(.active):hover {
+        background-color: rgba(100, 53, 201, 0.04) !important;
+    }
+
+</style>
+
+<div class="ui grid">
+
+
+    <div class="row">
+        <div class="four wide column">
+            {$sidebar}
+        </div>
+
+        <div class="twelve wide column">
+            ee
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $('.plugins-menu').on('click', '.item', function (event) {
+
+            let $this = $(this);
+
+            $('.plugins-menu').find('.active.item').removeClass('active');
+
+            $this.addClass('active');
+        });
+
+    });
+</script>

@@ -1,0 +1,91 @@
+<!-- @formatter:off -->
+
+<div class="fifteen wide column">
+    <div class="segment">
+        <table class="ui very basic sortable fixed single line selectable celled table" id="billboardCities__table">
+
+            <!-- thead -->
+            <thead>
+                <tr class="center aligned">
+
+                    <th class="one-half wide
+                        {if !empty($sort.column) && $sort.column === 'id'}
+                            sorted
+                            {if $sort.direction === 'asc'} ascending{/if}
+                            {if $sort.direction === 'desc'} descending{/if}
+                        {/if}" data-column="id">№</th>
+
+                    <th class="seven wide
+                        {if !empty($sort.column) && $sort.column === 'name'}
+                            sorted
+                            {if $sort.direction === 'asc'} ascending{/if}
+                            {if $sort.direction === 'desc'} descending{/if}
+                        {/if}" data-column="name">Название</th>
+
+                    <th class="four wide not-sortable">Страна</th>
+
+                    <th class="two wide
+                        {if !empty($sort.column) && $sort.column === 'active_adverts'}
+                            sorted
+                            {if $sort.direction === 'asc'} ascending{/if}
+                            {if $sort.direction === 'desc'} descending{/if}
+                        {/if}" data-column="active_adverts">Кол-во</th>
+
+                    <th class="two wide not-sortable"></th>
+                </tr>
+            </thead>
+
+            <!-- tbody -->
+            <tbody>
+                {if !empty($cities)}
+                    {foreach $cities as $city}
+                        <tr data-city-id="{$city.id}">
+                            <td class="center aligned">
+                                <a href="#">#{$city.id}</a>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">{$city.name}</a>
+                            </td>
+                            <td class="center aligned">
+                                <a href="#">Российская Федерация</a>
+                            </td>
+                            <td class="center aligned">
+                                <a class="ui basic label count-label">{$city.active_count} / {$city.total_count}</a>
+                            </td>
+                            <td class="center aligned">
+                                <div class="ui small compact icon bttn billboardCities__table--edit-city-bttn">
+                                    <i class="pencil alternate icon"></i>
+                                </div>
+                                <div class="ui small compact icon bttn billboardCities__table--remove-city-bttn">
+                                    <i class="trash alternate icon"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr class="center aligned">
+                        <td colspan="5">
+                            <div class="ui tiny grey header">Нет результатов</div>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+
+            <!-- tfoot -->
+            <tfoot>
+                <tr class="center aligned">
+                    <th colspan="5">
+                        {include file = './pagination.html'}
+                    </th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <div class="ui inverted  dimmer billboardCities__table-dimmer">
+            <div class="ui text violet loader">Loading</div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

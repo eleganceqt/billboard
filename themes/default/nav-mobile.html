@@ -1,0 +1,21 @@
+<div class="nav-mobile">
+    <div class="inner-wrap">
+        <ul class="nav-mobile-wrap">
+            <li class="active"><a class="n-home" href="http://billboard.quadrodizain.ru/"></a></li>
+            <li><a class="n-menu" href="javascript:void(0);"></a></li>
+            <li><a class="n-add" href="{$wa->getUrl('/frontend/accountAdvertCreate')}"></a></li>
+            <li><a class="n-fav" href="/account/favorites/"></a></li>
+            <li>
+                <a class="n-user" href="javascript:void(0);"></a>
+                <div class="user-drop">
+                    <ul>
+                        <li><a href="/account/adverts/">Мои объявления</a></li>
+                        <li><a href="/account/favorites/">Мои избранные</a></li>
+                        <li class="last"><a href="?logout">Выйти</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="cat-modal" data-loaded="false"></div>
+</div>

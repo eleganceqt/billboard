@@ -1,0 +1,142 @@
+<!-- @formatter:off -->
+
+<div id="create" class="inner-wrap billboard__advert-edit-wrapper">
+
+    <form class="ui basic segment create-wrap billboard__advert-edit-form" action="{$wa->getUrl('/frontend/accountAdvertUpdate', ['advert_id' => $advert.id])}" method="POST">
+
+        <!-- title -->
+        <div class="title-wrap">
+            <span class="title category important">Заголовок</span>
+            <span class="simbols">70 знаков</span>
+            <input type="text" id="title" name="title" value="{$advert.title|escape}" autocomplete="off">
+        </div>
+
+        <div class="options-wrap mt20">
+
+            <!-- category -->
+            {$categories = $wa->billboard->categories()}
+            <div class="cat-dd">
+                <span class="title category important">Категория</span>
+                <div class="ui categories dropdown">
+                    <input type="hidden" name="category_id" {if in_array($advert.category_id, array_keys($categories))}value="{$advert.category_id}"{/if}>
+                    <span class="text">Выберите категорию</span>
+                    <i class="angle down icon"></i>
+                    <div class="menu">
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="Поиск...">
+                        </div>
+
+                        <div class="scrolling menu">
+                            {foreach $categories as $category}
+
+                                {*if !$category@first}
+                                    {if $category.depth == 0}
+                                        <div class="divider"></div>
+                                    {/if}
+                                {/if*}
+
+                                <div class="item {if $category.depth == 0}root-category{/if}" data-value="{$category.id}">
+                                    {for $i = 1 to $category.depth}
+                                        <i class="icon"></i>
+                                    {/for}
+                                    {$category.name|escape}
+                                </div>
+
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- city -->
+            {$cities = $wa->billboard->cities()}
+            <div class="city-dd">
+                <span class="title city important">Город</span>
+                <div class="ui city dropdown">
+                    <input type="hidden" name="city_id" {if in_array($advert.city_id, array_keys($cities))}value="{$advert.city_id}"{/if}>
+                    <span class="text">Выберите город</span>
+                    <i class="angle down icon"></i>
+                    <div class="menu">
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="Поиск...">
+                        </div>
+
+                        <div class="scrolling menu">
+                            {foreach $cities as $city}
+                                <div class="item" data-value="{$city.id}">{$city.name|escape}</div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- price -->
+            <div class="price-wrap mt20">
+                <span class="title price important">Цена</span>
+                <input type="text" id="price" name="price" value="{(int) $advert.price}" autocomplete="off">
+            </div>
+
+            <!-- description -->
+            <div class="desc-wrap mt20">
+                <span class="title desc">Описание</span>
+                <span class="simbols">1000 знаков</span>
+                <textarea rows="20" cols="45" name="description">{$advert.description|escape}</textarea>
+            </div>
+        </div>
+
+        <!-- images -->
+        <div class="image-wrap mt20">
+            <div class="additional" data-upload-url="{$wa->getUrl('/frontend/accountAdvertUploadImages', ['advert_id' => $advert.id])}">
+                <input type="file" id="file" name="file" accept="image/*" multiple style="display: none;">
+                <label class="additional-label" for="file"><span></span></label>
+            </div>
+            <div class="items">
+                <ul data-sort-url="{$wa->getUrl('/frontend/accountAdvertSortImages', ['advert_id' => $advert.id])}">
+                    {foreach $advert.images as $image}
+                        <li data-image-id="{$image.id}" data-delete-url="{$wa->getUrl('/frontend/accountAdvertDeleteImage', ['advert_id' => $advert.id, 'image_id' => $image.id])}">
+                            <img src="{$image.url|escape}" alt="">
+                            <i class="close delete-image"></i>
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="info"><span class="blue">Максимальное количество фотографий - 5</span></div>
+        </div>
+
+        <!-- captcha -->
+        <div class="capture-wrap mt20">
+            {$wa->captcha()}
+        </div>
+
+        <!-- message placeholder -->
+        <div class="message-wrap mt20 message-placeholder"></div>
+
+        <!-- csrf -->
+        {$wa->csrf()}
+
+        <!-- submit -->
+        <div class="submit-wrap mt20">
+            <input type="submit" class="btn button-blue" value="Разместить объявление">
+        </div>
+
+        <!-- dimmer -->
+        <div class="ui inverted dimmer billboard__advert-edit-dimmer">
+            <div class="ui text loader">Loading</div>
+        </div>
+    </form>
+
+</div>
+
+<!-- Jquery Sortable JS -->
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.core.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.widget.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.mouse.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.position.min.js"></script>
+<script src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.sortable.min.js"></script>
+
+<!-- Module JS -->
+<script src="/wa-apps/billboard/themes/default/js/account/advert/advertEditModule.js?v={$wa->version()}"></script>
+
+<!-- @formatter:on -->

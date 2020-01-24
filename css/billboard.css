@@ -1,0 +1,210 @@
+/*******************************
+             Common
+*******************************/
+#wa-header {
+    background: #f0f0f0;
+}
+
+.left-sidebar {
+    border-right: 2px solid rgba(34, 36, 38, 0.15);
+}
+
+.right-sidebar {
+    border-left: 2px solid rgba(34, 36, 38, 0.15);
+}
+
+.sidebar-menu {
+    border: none !important;
+    min-height: calc(100vh - 223px) !important;
+}
+
+.sidebar-menu .active.item {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-width: 3px !important;
+    color: #6435c9 !important;
+}
+
+.sidebar-menu .active.item > .label {
+    background-color: #6435c9;
+    border-color: #6435c9;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sidebar-menu .item > i.icon {
+    /*opacity: 0.9 !important;*/
+    float: none !important;
+    margin: 0 1em 0 0 !important;
+}
+
+/* Hover */
+.sidebar-menu .dropdown.item:hover,
+.sidebar-menu .link.item:hover,
+.sidebar-menu a.item:hover {
+    /*background-color: transparent;*/
+    /*color: rgba(0, 0, 0, 0.87);*/
+    color: #6435c9 !important;
+}
+
+/* Hover */
+.sidebar-menu .dropdown.item:not(.active):hover,
+.sidebar-menu .link.item:not(.active):hover,
+.sidebar-menu a.item:not(.active):hover {
+    background-color: rgba(100, 53, 201, 0.04) !important;
+}
+
+/* Pressed */
+.sidebar-menu .dropdown.item:active,
+.sidebar-menu .link.item:active,
+.sidebar-menu a.item:active {
+    /*background-color: transparent;*/
+    border-color: #6435c9;
+    border-width: 3px !important;
+}
+
+/*table.hoverable tbody > tr:hover {*/
+/*    background-color: rgba(100, 53, 201, 0.15) !important*/
+/*}*/
+
+.ui.fixed.table th, .ui.fixed.table td .header {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ui.table thead th {
+    border-bottom: 1px solid #6435c9 !important;
+}
+
+.ui.table th.one-half.wide, #adverts-table td.one-half.wide {
+    width: 9.375% !important;
+}
+
+.ui.table th.two-half.wide, #adverts-table td.two-half.wide {
+    width: 15.625% !important;
+}
+
+.ui.table > tbody > tr:hover {
+    background-color: rgba(100, 53, 201, 0.04) !important;
+    color: rgba(0, 0, 0, 0.95);
+}
+
+.ui.table .pagination.menu .item {
+    padding: 0.92857143em 1.14285714em !important;
+}
+
+.ui.table .pagination.menu .active.item {
+    font-weight: bold;
+    color: #6435c9 !important;
+}
+
+.ui.table .pagination.menu a.item:hover {
+    color: #6435c9 !important;
+}
+
+.ui.table th.not-sortable {
+    cursor: auto !important;
+    background: transparent !important;
+}
+
+.categories-accordion, .categories-accordion .accordion {
+    box-shadow: none !important;
+}
+
+.advert-images .content {
+    padding: 0.5em 0.5em !important;
+}
+
+.ui.table tr.disabled {
+    background: #E0E0E0 !important;
+}
+
+.ui.table tr.disabled .count-label {
+    background-color: #E8E8E8 !important;
+}
+
+
+.movable:before {
+    cursor: move;
+}
+
+/*******************************
+             Adverts
+*******************************/
+
+.padding-top-0 {
+    padding-top: 0rem !important;
+}
+
+.padding-top-3 {
+    padding-top: 2rem !important;
+}
+
+.padding-x-0 {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden !important;
+}
+
+.max-height-27rem {
+    max-height: 27rem !important;
+}
+
+.margin-right-0 {
+    margin-right: 0.25rem !important;
+}
+
+.item.hidden {
+    display: none !important;
+}
+
+.row.hidden {
+    display: none !important;
+}
+
+/*******************************
+             Categories
+*******************************/
+
+.ui.selection.list .list > .item,
+.ui.selection.list > .item {
+    cursor: pointer;
+    background: transparent;
+    padding: 0.5em 0.5em;
+    margin: 0;
+    color: inherit;
+!important;
+    border-radius: 0.5em;
+    transition: none !important;
+}
+
+.ui.selection.list .list > .item:last-child,
+.ui.selection.list > .item:last-child {
+    margin-bottom: 0;
+}
+
+.ui.selection.list .list > .item:hover,
+.ui.selection.list > .item:hover {
+    background: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.ui.selection.list .list > .item:active,
+.ui.selection.list > .item:active {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.ui.selection.list .list > .item.active,
+.ui.selection.list > .item.active {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.95);
+}
+
+.fields {
+    float: none !important;
+    margin-bottom: inherit !important;
+    overflow: inherit !important;
+
+}

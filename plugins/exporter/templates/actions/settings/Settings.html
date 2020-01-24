@@ -1,0 +1,242 @@
+<!-- @formatter:off -->
+
+<h4 class="ui horizontal divider header">
+    <i class="plug icon"></i>
+    Плагины
+</h4>
+
+<style>
+    .plugins-menu {
+        border-right: 2px solid rgba(34, 36, 38, 0.15) !important;
+        min-height: calc(100vh - 188px) !important;
+    }
+
+    .plugins-menu .active.item {
+        border-width: 2px !important;
+        margin: 0 -2px 0 0 !important;
+        color: #6435c9 !important;
+
+        /*color: inherit !important;*/
+    }
+
+    .plugins-menu .item > i.icon {
+        /*opacity: 0.9 !important;*/
+        float: left !important;
+        margin: 0 1em 0 0 !important;
+    }
+
+    /* Hover */
+    .plugins-menu .dropdown.item:hover,
+    .plugins-menu .link.item:hover,
+    .plugins-menu a.item:hover:not(.active) {
+        /*color: inherit !important;*/
+        color: #6435c9 !important;
+    }
+
+    /* Hover */
+    .plugins-menu .dropdown.item:not(.active):hover,
+    .plugins-menu .link.item:not(.active):hover,
+    .plugins-menu a.item:not(.active):hover {
+        background-color: rgba(100, 53, 201, 0.04) !important;
+    }
+
+    .date-input {
+        text-align: center !important;
+    }
+
+</style>
+
+<link rel="stylesheet" href="/wa-apps/billboard/plugins/exporter/js/datepicker/css/bootstrap-datepicker.standalone.min.css">
+
+<div class="ui grid" id="billboardExporterSettings__wrapper">
+
+    <div class="row">
+
+        <!-- sidebar -->
+        <div class="three wide column">{$sidebar}</div>
+
+        <!-- content -->
+        <div class="thirteen wide column">
+            <div class="row">
+                <div class="ten wide column">
+
+                    <!-- tabs menu -->
+                    <div class="ui four item tabs menu">
+                        <a class="item" data-tab="adverts">Объявления</a>
+                        <a class="item" data-tab="categories">Категории</a>
+                        <a class="item" data-tab="partners">Партнёры</a>
+                        <a class="item" data-tab="cities">Города</a>
+                    </div>
+
+                    <!-- adverts tab -->
+                    <div class="ui tab" data-tab="adverts">
+                        <div class="ui grid">
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <label>Объявления</label>
+                                            <div class="ui fluid search clearable selection multiple adverts dropdown">
+                                                <input type="hidden" name="adverts">
+                                                <i class="dropdown icon"></i>
+                                                <input type="text" class="search">
+                                                <div class="menu"></div>
+                                            </div>
+                                        </div>
+                                        <div class="fields">
+                                            <div class="eight wide field">
+                                                <label>Дата начала</label>
+                                                <div class="ui fluid left icon input">
+                                                    <i class="calendar icon"></i>
+                                                    <input type="text" class="date-input" name="date_from" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="eight wide field">
+                                                <label>Дата конца</label>
+                                                <div class="ui fluid left icon input">
+                                                    <i class="calendar icon"></i>
+                                                    <input type="text" class="date-input" name="date_to" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="ui indicating adverts progress" style="display: none;">
+                                        <div class="bar"></div>
+                                        <div class="label">Loading</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui basic segment" style="text-align:center;">
+                                        <div class="ui disabled primary bttn adverts-export-bttn">Экспортировать</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- categories tab -->
+                    <div class="ui tab" data-tab="categories">
+                        <div class="ui grid">
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <label>Категории</label>
+                                            <div class="ui fluid search clearable selection multiple categories dropdown">
+                                                <input type="hidden" name="categories">
+                                                <i class="dropdown icon"></i>
+                                                <input type="text" class="search">
+                                                <div class="menu"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="ui indicating categories progress" style="display: none;">
+                                        <div class="bar"></div>
+                                        <div class="label">Loading</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui basic segment" style="text-align:center;">
+                                        <div class="ui disabled primary bttn categories-export-bttn">Экспортировать</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- partners tab -->
+                    <div class="ui tab" data-tab="partners">
+                        <div class="ui grid">
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <label>Партнёры</label>
+                                            <div class="ui fluid search clearable selection multiple partners dropdown">
+                                                <input type="hidden" name="partners">
+                                                <i class="dropdown icon"></i>
+                                                <input type="text" class="search">
+                                                <div class="menu"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="ui indicating partners progress" style="display: none;">
+                                        <div class="bar"></div>
+                                        <div class="label">Loading</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui basic segment" style="text-align:center;">
+                                        <div class="ui disabled primary bttn partners-export-bttn">Экспортировать</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- cities tab -->
+                    <div class="ui tab" data-tab="cities">
+                        <div class="ui grid">
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <label>Города</label>
+                                            <div class="ui fluid search clearable selection multiple cities dropdown">
+                                                <input type="hidden" name="cities">
+                                                <i class="dropdown icon"></i>
+                                                <input type="text" class="search">
+                                                <div class="menu"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="ui indicating cities progress" style="display: none;">
+                                        <div class="bar"></div>
+                                        <div class="label">Loading</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centered row">
+                                <div class="column">
+                                    <div class="ui basic segment" style="text-align:center;">
+                                        <div class="ui disabled primary bttn cities-export-bttn">Экспортировать</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/wa-apps/billboard/plugins/exporter/js/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/wa-apps/billboard/plugins/exporter/js/datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
+
+<script src="/wa-apps/billboard/plugins/exporter/js/exporterSettings.js?v={$wa->version()}"></script>
+
+<!-- @formatter:on -->

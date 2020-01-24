@@ -1,0 +1,27 @@
+<!-- @formatter:off -->
+
+<div id="search-bar">
+    <div class="search-bar_search">
+        <form class="search-bar billboardSearch--input-form">
+            <label class="search_label" for="filter-search_text">
+                <input type="text" name="query" id="filter-search_text" placeholder="Поиск объявления" value="{$wa->get('query')|escape}" autocomplete="off">
+                <div class="please-wrap">
+                    <span class="please-type">Пиши здесь если ищешь что-то конкретное...</span>
+                    <span class="please-enter">И нажмите Enter</span>
+                    <div class="bg-search"></div>
+                </div>
+            </label>
+            <div class="submit-wrap">
+                <input type="submit" class="bnt-search-submit" value="">
+                <div class="bnt-search-clear"></div>
+            </div>
+        </form>
+    </div>
+
+    <div class="search-bar_filter_btn">
+        <div class="btn button-opacity js-show-filter" {if $wa->param('action') === 'search'}style="display: none;"{/if}>Фильтровать результаты</div>
+        <div class="btn button-white js-hide-filter" {if $wa->param('action') === 'search'}style="display: inline-flex;"{/if}>Скрыть фильтр</div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

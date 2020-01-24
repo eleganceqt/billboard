@@ -1,0 +1,19 @@
+<!-- @formatter:off -->
+
+<div id="breadcrumbs">
+    <ul>
+        {foreach $breadcrumbs as $breadcrumb}
+
+            {if !$breadcrumb@last}
+                <li>
+                    <a href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
+                </li>
+            {else}
+                <li class="last">{$breadcrumb.name|escape}</li>
+            {/if}
+
+        {/foreach}
+    </ul>
+</div>
+
+<!-- @formatter:on -->

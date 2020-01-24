@@ -1,0 +1,29 @@
+<div class="list-thumbs-slider">
+    <div class="thumbs-title h5">Рекомендованные объявления</div>
+
+    {$advertsMainImages = $wa->billboard->advertsMainImages(array_keys($adverts), '268x268')}
+
+    <ul class="thumbs-slider">
+
+        {foreach $adverts as $advert}
+
+            {$advertMainImageSrc = ( !empty($advertsMainImages[$advert.id]) ) ? $advertsMainImages[$advert.id]['url'] : "`$wa_active_theme_url`img/images/nophoto.png"}
+            <li class="item">
+                <div class="image">
+                    <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">
+                        <img src="{$advertMainImageSrc}" alt="">
+                    </a>
+                </div>
+
+                <div class="description">
+                    <div class="title">
+                        <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">{$advert.title|escape}</a>
+                    </div>
+                    <div class="desc"> <p>{mb_strimwidth($advert.description, 0, 60, '...')|escape}</p></div>
+                    <div class="price">{billboard_currency($advert.price)}</div>
+                </div>
+            </li>
+        {/foreach}
+        
+    </ul>
+</div>

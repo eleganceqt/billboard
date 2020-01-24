@@ -1,0 +1,17 @@
+<!-- @formatter:off -->
+
+<div id="side-bar">
+    <div class="cart-list">
+        <div class="title">Объявления</div>
+        {$rootCategories = $wa->billboard->rootCategories()}
+        <ul>
+            {foreach $rootCategories as $rootCategory}
+                <li {if $wa->param('action') === 'category' && ($category.id == $rootCategory.id || $category.root_id == $rootCategory.id)}class="active"{/if}>
+                    <a href="{$wa->getUrl('/frontend/category', ['category_url' => $rootCategory.slug])}">{$rootCategory.name|escape}</a>
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+</div>
+
+<!-- @formatter:on -->

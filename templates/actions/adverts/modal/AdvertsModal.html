@@ -1,0 +1,172 @@
+<!-- @formatter:off -->
+
+<div class="ui large modal billboardAdverts__modal">
+    <i class="close icon"></i>
+    <div class="ui  center aligned header">
+        Объявление #{$advert.id}
+    </div>
+    <div class="scrolling content">
+        <div class="ui ten column form">
+            <div class="ui tiny dividing right aligned header">Добавлено {$advert.create_datetime|wa_datetime:'humandate'}</div>
+
+            <input type="hidden" name="id" value="{$advert.id}">
+
+            <!-- status -->
+            <div class="field">
+                <label>Статус</label>
+                <div class="ui selection status dropdown">
+                    <input type="hidden" name="status" value="{$advert.status}">
+                    <i class="dropdown icon"></i>
+                    <div class="default text"></div>
+                    <div class="menu">
+                        <div class="item" data-value="on">
+                            <i class="green toggle on icon"></i>Вкл.
+                        </div>
+                        <div class="item" data-value="off">
+                            <i class="red toggle off icon"></i>Выкл.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- title -->
+            <div class="field">
+                <label>Заголовок</label>
+                <input type="text" name="title" value="{$advert.title|escape}" autocomplete="off">
+            </div>
+
+            <!-- partner -->
+            <div class="field">
+                <label>Контакт</label>
+                <a {if $advert.partner->exists()}href="{$wa_backend_url}contacts/#/contact/{$advert.partner_id}/"{/if} target="_blank" class="ui fluid basic bttn" style="text-align: left;">
+                    <i class="user tie icon"></i>
+                    {if $advert.partner->exists()}
+                        {$advert.partner->get('company', 'value')|escape}
+                    {else}
+                        —
+                    {/if}
+                </a>
+            </div>
+
+            <!-- phone -->
+            <div class="field">
+                <label>Телефон</label>
+                {$phone = ''}
+                {if $advert.partner->exists()}
+                    {$phone = reset(ref($advert.partner->get('phone', 'value')))|regex_replace:'/\D/':''|ltrim:'0'}
+                {/if}
+                <a href="https://wa.me/{$phone|escape}" target="_blank" class="ui fluid basic bttn" style="text-align: left;">
+                    <i class="phone alternate icon"></i>
+                    {if $advert.partner->exists()}
+                        {reset(ref($advert.partner->get('phone', 'value')))|escape}
+                    {/if}
+                </a>
+            </div>
+
+            <!-- category -->
+            <div class="field">
+                <label>Категория</label>
+
+                {$categories = $wa->billboard->categories()}
+                <div class="ui fluid selection categories dropdown">
+                    <input type="hidden" name="category_id" {if in_array($advert.category_id, array_keys($categories))}value="{$advert.category_id}"{/if}>
+                    <div class="default text">Выберите категорию</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu overflow-y-hidden max-height-27rem">
+
+                        <div class="ui search icon input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="Search category...">
+                        </div>
+                        <div class="divider"></div>
+
+                        <div class="scrolling menu items-menu">
+                            {foreach $categories as $category}
+                                <div class="item {if $category.depth == 0}root-category{/if}" data-value="{$category.id}">
+                                    {for $i = 1 to $category.depth}
+                                        <i class="icon"></i>
+                                    {/for}
+                                    {$category.name|escape}
+                                </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- city -->
+            <div class="field">
+                <label>Город</label>
+                {$cities = $wa->billboard->cities()}
+
+                <div class="ui fluid selection cities dropdown">
+                    <input type="hidden" name="city_id" {if in_array($advert.city_id, array_keys($cities))}value="{$advert.city_id}"{/if}>
+                    <div class="default text">Выберите город</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu overflow-y-hidden max-height-27rem">
+                        <div class="ui search icon input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="Search city...">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="scrolling menu">
+                            {foreach $cities as $city}
+                                <div class="item" data-value="{$city.id}">{$city.name|escape}</div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- description -->
+            <div class="field">
+                <label>Описание</label>
+                <textarea name="description">{$advert.description|escape}</textarea>
+            </div>
+
+            <!-- price -->
+            <div class="field">
+                <label>Цена (руб.)</label>
+                <input type="text" name="price" value="{(int) $advert.price}" autocomplete="off">
+            </div>
+
+            <!-- images -->
+            <div class="field">
+                <label>Фото</label>
+                {$images = $wa->billboard->advertImages($advert.id, '970x0')}
+                <div class="ui five cards advert-images">
+                    {foreach $images as $image}
+                        <div class="card" data-image-id="{$image.id}">
+                            <div class="content">
+                                <div class="ui fluid image">
+                                    <img src="{$image.url|escape}" alt="">
+                                </div>
+                            </div>
+                            <div class="ui bottom attached bttn delete-image">Удалить</div>
+                        </div>
+                    {/foreach}
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div style="text-align: center;">
+                    <input type="file" name="file" accept="image/*" multiple style="display: none;">
+                    <div class="ui bttn upload-images"><i class="upload icon"></i>Загрузить</div>
+                </div>
+            </div>
+
+
+            <!-- message -->
+            <div class="field billboardAdverts__modal--message-field"></div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui basic center aligned segment">
+            <div class="ui primary bttn billboardAdverts__modal--save-button">
+                Сохранить
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- @formatter:on -->

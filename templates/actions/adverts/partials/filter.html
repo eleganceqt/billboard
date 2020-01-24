@@ -1,0 +1,94 @@
+<!-- @formatter:off -->
+
+<!-- partners -->
+<div class="three wide column">
+    {$partners = $wa->billboard->partners()}
+    <div class="ui fluid multiple selection clearable dropdown partners-dropdown">
+        <input type="hidden" name="partners">
+        <i class="dropdown icon"></i>
+        <i class="grey user tie icon"></i> |
+        <div class="default text">Партнёр</div>
+
+        <div class="menu overflow-y-hidden max-height-27rem">
+            <div class="ui search icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search partners...">
+            </div>
+            <div class="divider"></div>
+            <div class="scrolling menu items-menu">
+                {foreach $partners as $partner}
+                    <div class="item" data-value="{$partner.id}" title="{$partner.name|escape}">
+                        <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>{$partner.name|escape}</label>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- cities -->
+<div class="three wide column padding-x-0">
+    {$cities = $wa->billboard->cities()}
+    <div class="ui fluid multiple selection clearable dropdown cities-dropdown">
+        <input type="hidden" name="cities">
+        <i class="dropdown icon"></i>
+        <i class="grey map marker alternate icon"></i> |
+        <div class="default text">Город</div>
+
+        <div class="menu overflow-y-hidden max-height-27rem">
+            <div class="ui search icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search cities...">
+            </div>
+            <div class="divider"></div>
+            <div class="scrolling menu items-menu">
+                {foreach $cities as $city}
+                    <div class="item" data-value="{$city.id}" title="{$city.name|escape}">
+                        <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>{$city.name|escape}</label>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- categories -->
+<div class="five wide column">
+    {$categories = $wa->billboard->categories()}
+    <div class="ui fluid multiple selection clearable dropdown categories-dropdown">
+        <input type="hidden" name="categories">
+        <i class="dropdown icon"></i>
+        <i class="grey folder icon"></i> |
+        <div class="default text">Категория</div>
+
+        <div class="menu overflow-y-hidden max-height-27rem items-menu">
+            <div class="ui search icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search categories...">
+            </div>
+            <div class="divider"></div>
+            <div class="scrolling menu items-menu">
+                {foreach $categories as $category}
+                    <div class="item" data-value="{$category.id}" title="{$category.name|escape}">
+                        {for $i = 1 to $category.depth}
+                            <i class="icon"></i>
+                        {/for}
+                        <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>{$category.name|escape}</label>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- @formatter:on -->

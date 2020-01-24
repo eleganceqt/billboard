@@ -1,0 +1,19 @@
+<!-- @formatter:off -->
+
+<div class="list-types">
+    <ul>
+        <li class="active">
+            <a>Новые</a>
+        </li>
+        {if $wa->user()->isAuth()}
+            <li>
+                <a href="{$wa->getUrl('/frontend/accountAdverts')}">Мои объявления</a>
+            </li>
+            <li>
+                <a href="{$wa->getUrl('/frontend/accountFavorites')}">Избранное <span class="count">{$wa->billboard->favoritesCount()}</span></a>
+            </li>
+        {/if}
+    </ul>
+</div>
+
+<!-- @formatter:on -->

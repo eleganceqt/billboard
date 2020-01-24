@@ -1,0 +1,70 @@
+<!-- @formatter:off -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{$wa->title()|escape} | {$wa->appName()} — {$wa->accountName()}</title>
+
+    {$wa->css()}
+
+    <link rel="stylesheet" href="{$wa_app_static_url}assets/vendors/semantic-ui/semantic.css?v={$wa->version()}">
+    <link rel="stylesheet" href="{$wa_app_static_url}css/billboard.css?v{$wa->version()}">
+
+    <script src="{$wa_url}wa-content/js/jquery/jquery-1.11.1.min.js"></script>
+    <script src="{$wa_static_url}wa-content/js/jquery/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.core.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.widget.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.mouse.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.position.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.autocomplete.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.draggable.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.droppable.min.js"></script>
+	<script src="{$wa_static_url}wa-content/js/jquery-ui/jquery.ui.sortable.min.js"></script>
+
+    <script src="{$wa_url}wa-content/js/jquery-wa/wa.core.js?v{$wa->version(true)}"></script>
+    <script src="{$wa_app_static_url}js/billboard.js?v{$wa->version()}"></script>
+
+    <script src="{$wa_app_static_url}assets/vendors/semantic-ui/semantic.min.js"></script>
+</head>
+<body>
+
+<div id="wa">
+    {$wa->header()}
+    <div id="wa-billboard-app" style="height: calc(100vh - 83px) !important;">
+
+        <div class="ui basic segment" style="background: #f0f0f0;"></div>
+
+        <div class="ui padded grid">
+
+            <!-- sidebar -->
+            <div class="three wide column left-sidebar">
+                {block name = 'sidebar'}
+                    {$sidebar}
+                {/block}
+            </div>
+
+            <!-- content -->
+            <div class="thirteen wide column">
+                {block name = 'content'}
+                    {$content}
+                {/block}
+
+                <div class="ui inverted dimmer">
+                    <div class="ui text violet loader page-loader">Loading</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+<!-- @formatter:on -->

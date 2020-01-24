@@ -1,0 +1,12 @@
+<!-- @formatter:off -->
+
+<div class="ui fluid vertical tabular menu pages-menu">
+    {foreach $pages as $page}
+        <a href="{$wa_app_url}pages/{$page.id}/" class="item">
+            <i class="file icon"></i>
+            {$page.title|escape}
+        </a>
+    {/foreach}
+</div>
+
+<!-- @formatter:on -->

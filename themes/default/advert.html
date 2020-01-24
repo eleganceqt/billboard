@@ -1,0 +1,143 @@
+<!-- @formatter:off -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+<div id="advert" class="inner-wrap">
+
+    <div class="advert-wrap">
+        <div class="breadcrumbs">
+            {include file = './partials/breadcrumbs.html' inline}
+        </div>
+
+        <div class="title-name">
+            <h3 class="h3 black">{$advert.title|escape}</h3>
+                <div class="star-wrap">
+                    <div class="star {if $wa->user()->isAuth()}user{else}guest{/if}"
+                        data-add-url="{$wa->getUrl('/frontend/accountFavoriteAdd', ['advert_id' => $advert.id])}"
+                        data-remove-url="{$wa->getUrl('/frontend/accountFavoriteRemove', ['advert_id' => $advert.id])}"
+                        data-style="{if $wa->billboard->inFavorites($advert.id)}fill{else}empty{/if}">
+                        <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="e-star"
+                                d="M11.8677 1.3L14.5858 7.82362L14.7032 8.10537L15.0075 8.12971L22.0608 8.69417L16.6876 13.2887L16.4552 13.4874L16.5262 13.7849L18.1681 20.6558L12.1279 16.9731L11.8677 16.8144L11.6074 16.9731L5.56717 20.6558L7.20907 13.7849L7.28016 13.4874L7.04771 13.2887L1.6745 8.69417L8.72783 8.12971L9.03208 8.10537L9.14948 7.82362L11.8677 1.3Z"
+                                fill="" stroke="#A0A9B2"></path>
+                        </svg>
+                    </div>
+                    {if !$wa->user()->isAuth()}
+                        <div class="ui-mess-wrap">
+                            <div class="ui left pointing label">
+                                Cначала <a href="">авторизуйтесь</a>
+                            </div>
+                        </div>
+                    {/if}
+                </div>
+        </div>
+        <div class="title-info">
+            <span class="data">
+                <i class="clock outline icon"></i>
+                <span class="simbols">{$advert.create_datetime|wa_datetime:'humandatetime'}</span>
+            </span>
+            <span class="views">
+                <i class="eye icon"></i>
+                <span class="times">{$advert.views}</span>
+            </span>
+            <span class="user">
+                <a class="user-icon">
+                    <span class="name">
+                        {if $advert.partner->exists()}
+                            {$advert.partner->get('company', 'value')|escape}
+                        {else}
+                            —
+                        {/if}
+                    </span>
+                </a>
+            </span>
+        </div>
+
+        <div class="addvert">
+
+            {$advertImages = $wa->billboard->advertImages($advert.id, '970x0')}
+            <section class="photo">
+
+                {$mainImageSrc = "`$wa_active_theme_url`img/images/nophoto.png"}
+
+                {if billboardValidation::notBlank($advertImages)}
+                    {$mainImageSrc = $advertImages[$advert.image_id].url}
+                {/if}
+
+                <figure class="main-photo" data-fancybox="gallery" data-src="{$mainImageSrc}">
+                    <img src="{$mainImageSrc}" alt="{$advert.title|escape}" title="{$advert.title|escape}">
+                </figure>
+                {if count($advertImages) > 1}
+                    <figure class="photo-thumbs">
+                        <ul>
+                            {foreach $advertImages as $advertImage}
+                                {*if $advertImage.id !== $advert.image_id || true*}
+                                    <li class="item" data-fancybox="gallery" data-src="{$advertImage.url}">
+                                        <img class="thumb-img" src="{$advertImage.url}" alt="{$advert.title|escape}" title="{$advert.title|escape}">
+                                    </li>
+                                {*/if*}
+                            {/foreach}
+                        </ul>
+                    </figure>
+                {/if}
+            </section>
+
+            <section class="description">
+                <div class="desc">{$advert.description|escape}</div>
+
+                <div class="info">
+                    <div class="price">{billboard_currency_html($advert.price)}</div>
+                    <div class="info-tab">
+                        <ul>
+                            <li>
+                                <span class="name">Город</span>
+                                <span class="value">
+                                    {if billboardValidation::notBlank($advert.city)}
+                                        {$advert.city.name|escape}
+                                    {else}
+                                        —
+                                    {/if}
+                                </span>
+                            </li>
+                            <li>
+                                <span class="name">Продавец</span>
+                                <span class="value">
+                                    {if $advert.partner->exists()}
+                                        {$advert.partner->get('company', 'value')|escape}
+                                    {else}
+                                        —
+                                    {/if}
+                                </span>
+                            </li>
+                            <li class="phone">
+                                <span class="name">Номер</span>
+                                <span class="value">
+                                    {if $advert.partner->exists()}
+                                        {reset(ref($advert.partner->get('phone', 'value')))|escape}
+                                    {else}
+                                        —
+                                    {/if}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn button-blue js-shop-phone" data-number="https://wa.me/15551234567" data-number-inner="+001-(555)1234567">
+                        Показать номер
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    
+    <br>
+    {$recommendedAdverts = $wa->billboard->recommendedAdverts($advert, 0, 10)}
+    {if billboardValidation::notBlank($recommendedAdverts)}
+        {include file = './recommended.list.html' adverts = $recommendedAdverts inline}
+    {/if}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<!-- @formatter:on -->

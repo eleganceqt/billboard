@@ -1,0 +1,168 @@
+<h4 class="ui horizontal divider header">
+    <i class="folder icon"></i>
+    Категории
+</h4>
+
+<style>
+    .ui.list .list > .item > .image + .content, .ui.list .list > .item > .icon + .content, .ui.list > .item > .image + .content, .ui.list > .item > .icon + .content {
+        /*display: inline-block !important;*/
+    }
+
+    .ui.celled.list > .item, .ui.celled.list > .list,
+    .ui.list .item .list > .item {
+        display: flex;
+    }
+
+
+    .ui.list .list > .item > .image + .content, .ui.list .list > .item > .icon + .content, .ui.list > .item > .image + .content, .ui.list > .item > .icon + .content {
+        /*border: 1px solid red;*/
+    }
+
+    .ui.list .list > .item .header, .ui.list > .item .header {
+        display: inline-block !important;
+        max-width: 70% !important;
+    }
+
+    .ui.list .list > .item a.header, .ui.list > .item a.header {
+        margin-top: 6px !important;
+    }
+
+    /*.ui.list .list > .item > i.icon, .ui.list > .item > i.icon {*/
+    /*    margin-top: 3px !important;*/
+    /*}*/
+    .ui.list .list > .item > i.icon:not(.loading), .ui.list > .item > i.icon:not(.loading) {
+        padding-right: 0 !important;
+        padding-top: 3px !important;
+    }
+
+    ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item,
+    ul.ui.list ul, ol.ui.list ol, .ui.list .list:not(.icon) {
+        margin-top: 0.12857143em;
+        /*margin-bottom: 0.42857143em;*/
+    }
+
+    .item.droppable.dynamic {
+        /*background: cornflowerblue !important;*/
+    }
+
+    .item.droppable:not(.draggable) {
+        /*background: red;*/
+        height: 5px !important;
+        padding-bottom: inherit !important;
+        padding-top: inherit !important;
+    }
+
+    .ui.list .list .item.droppable:not(.draggable) {
+        padding: 0 !important;
+    }
+
+    /*.item-droppable {*/
+    /*    height: 5px !important;*/
+    /*}*/
+
+    .ui.list .item i.toggler:before {
+        display: inline-block;
+        margin-top: 2px !important;
+        padding-left: 5px !important;
+    }
+
+    .ui.list .ui.divider {
+        margin-top: 1rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    ul.ui.list ul, ol.ui.list ol, .ui.list .list:not(.icon) {
+        padding: inherit !important;
+    }
+
+    .fields {
+        float: none !important;
+        margin-bottom: inherit !important;
+        overflow: inherit !important;
+
+    }
+</style>
+
+<!-- @formatter:off -->
+
+{function name = renderTree categories = []}
+
+    {foreach $categories as $category}
+
+        {$hasChilds = !empty($category.childs)}
+
+        {$color = ($category.status === 'on') ? 'black' : 'grey'}
+
+        {if $category@first}
+            <div class="item droppable"></div>
+        {/if}
+
+        <div class="item draggable droppable" data-category-id="{$category.id}">
+            <i class="{if $hasChilds}angle right link{/if} icon toggler"></i>
+            <i class="large {$color} folder movable icon"></i>
+            <div class="middle aligned content">
+                <div class="right floated middle aligned content">
+                    <div class="ui tiny basic label">
+                        {$category.active_count} / {$category.total_count}
+                    </div>
+                    <div class="ui tertiary tiny icon bttn billboardCategories--subcreate-category-bttn" data-parent-id="{$category.id}">
+                        <i class="plus circle icon"></i>
+                    </div>
+                    <div class="ui tertiary tiny icon bttn billboardCategories--edit-category-bttn">
+                        <i class="pencil alternate icon"></i>
+                    </div>
+                    <div class="ui tertiary tiny icon bttn billboardCategories--delete-category-bttn">
+                        <i class="trash alternate icon"></i>
+                    </div>
+                </div>
+
+                <a class="header">{$category.name|escape}</a>
+
+                {if $hasChilds}
+                    <div class="hidden list">
+                        {renderTree categories = $category.childs}
+                    </div>
+                {/if}
+            </div>
+        </div>
+
+        <div class="item droppable"></div>
+
+    {/foreach}
+
+{/function}
+
+<div class="ui grid" id="billboardCategories__wrapper">
+
+    <div class="centered row">
+
+        <div class="fifteen wide column">
+
+            <div class="ui relaxed middle aligned list billboardCategories--draggable-list">
+
+                {if !empty($categories)}
+                    {renderTree categories = $categories}
+                {/if}
+
+                <div class="ui divider"></div>
+                <div class="item billboardCategories--create-category-item" style="text-align: center;">
+                    <div class="middle aligned content">
+                        <a class="header">
+                            <i class="grey plus circle icon"></i>
+                            Добавить категорию
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal placeholder -->
+    <div class="row billboardCategories__modal-placeholder"></div>
+
+
+</div>
+
+<script src="/wa-apps/billboard/js/modules/billboardCategoriesModule.js?v={$wa->version()}"></script>
+
+<!-- @formatter:on -->

@@ -1,0 +1,9 @@
+{
+    "require": {
+        "symfony/var-dumper": "^3.4.31",
+        "filp/whoops": "^2.5.0",
+        "respect/validation": "^1.1",
+        "fzaninotto/faker": "^1.8",
+        "nesbot/carbon": "^1.39.0"
+    }
+}

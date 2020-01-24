@@ -1,0 +1,74 @@
+<!-- @formatter:off -->
+
+<div class="list-thumbs my-thumbs-wrap">
+
+    {if billboardValidation::notBlank($adverts)}
+
+        {$keys = $wa->billboard->splitAdvertsByImage($adverts)}
+
+        {$squareImages = $wa->billboard->advertsMainImages($keys['square'], '140x140')}
+        {$rectangularImages = $wa->billboard->advertsMainImages($keys['rectangular'], '170x200')}
+
+        {$advertsMainImages = $squareImages + $rectangularImages}
+
+        <ul class="list-thumbs_ul">
+
+            {foreach $adverts as $advert}
+
+                {$advertMainImageSrc = ( !empty($advertsMainImages[$advert.id]) ) ? $advertsMainImages[$advert.id]['url'] : "`$wa_active_theme_url`img/images/nophoto.png"}
+
+                <li class="list-thumbs_li {if $advert.status === billboardAdvertModel::STATUS_OFF}disabled{/if}">
+                    <div class="thumb-img">
+                        <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">
+                            <img src="{$advertMainImageSrc}" alt="{$advert.title|escape}" title="{$advert.title|escape}">
+                        </a>
+                    </div>
+                    <div class="thumb-info">
+                        <div class="title">
+                            <a href="{$wa->getUrl('/frontend/advert', ['advert_id' => $advert.id])}">{$advert.title|escape}</a>
+                        </div>
+                        <div class="info">
+                            <div class="price-wrap">
+                                <div class="price">
+                                    <span class="add-price">{billboard_currency($advert.price)}</span>
+                                    <div class="data">
+                                        {if billboardValidation::notBlank($advert.category)}
+                                            <a href="{$wa->getUrl('/frontend/category', ['category_url' => $advert.category.slug])}" class="tag">{$advert.category.name|escape}</a>
+                                        {/if}
+                                        <span class="simbols">{$advert.create_datetime|wa_datetime:'humandatetime'}</span>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <div class="edit">
+                                        <a href="{$wa->getUrl('/frontend/accountAdvertEdit', ['advert_id' => $advert.id])}" class="edit-advert" title="Редактировать">
+                                            <i class="pencil alternate icon"></i>
+                                        </a>
+                                    </div>
+                                    <div class="view">
+                                        <i class="eye {if $advert.status === billboardAdvertModel::STATUS_ON}slash hide-advert{else}show-advert{/if} icon"
+                                           data-show-url="{$wa->getUrl('/frontend/accountAdvertShow', ['advert_id' => $advert.id])}"
+                                           data-hide-url="{$wa->getUrl('/frontend/accountAdvertHide', ['advert_id' => $advert.id])}"
+                                           title="{if $advert.status === billboardAdvertModel::STATUS_ON}Скрыть{else}Показать{/if}"></i>
+                                    </div>
+                                    <div class="delete">
+                                        <i class="trash alternate icon delete-advert" data-delete-url="{$wa->getUrl('/frontend/accountAdvertDelete', ['advert_id' => $advert.id])}" title="Удалить"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {/foreach}
+
+        </ul>
+    {else}
+        NO ADVERTS MESSAGE
+    {/if}
+
+</div>
+
+{if isset($totalPages) && $totalPages > 1}
+    {wa_pagination page = $currentPage total = $totalPages attrs = ['class' => 'pagination-list']}
+{/if}
+
+<!-- @formatter:on -->

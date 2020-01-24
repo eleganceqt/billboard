@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="default" system="0" vendor="webasyst" author="Webasyst" app="site" version="3.3.8">
+    <name locale="en_US">Default 3.0</name>
+    <name locale="ru_RU">Дефолт 3.0</name>
+    <description locale="en_US">Adaptive design theme for all base Webasyst apps</description>
+    <description locale="ru_RU">Семейство адаптивных тем дизайна для всех базовых приложений Webasyst</description>
+    <support locale="en_US">https://support.webasyst.com</support>
+    <support locale="ru_RU">https://support.webasyst.ru</support>
+    <files>
+        <file path="index.html"></file>
+        <file path="default.css"></file>
+        <file path="default.js"></file>
+        <file path="head.html"></file>
+        <file path="header.html"></file>
+        <file path="home.html"></file>
+        <file path="main.html"></file>
+        <file path="footer.html"></file>
+        <file path="page.html"></file>
+        <file path="login.html"></file>
+        <file path="signup.html"></file>
+        <file path="forgotpassword.html"></file>
+        <file path="error.html"></file>
+    </files>
+    <settings></settings>
+    <locales></locales>
+</theme>
